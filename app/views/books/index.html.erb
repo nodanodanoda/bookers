@@ -1,12 +1,6 @@
-<% if @book.errors.any? %>
-  <div>
-    <ul>
-      <% @book.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+ <% end %>
 
 <h1>Books</h1>
 <table>
@@ -29,12 +23,19 @@
 
 </table>
 
-
-
+<% if @book.errors.any? %>
+  <div><p>error</p>
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <h1>New book</h1>
  
- <%= form_for(@book, url: '/books/') do |f| %>
+ <%= form_for(@book, url: '/books') do |f| %>
 
     <h4>Title</h4>
     <%= f.text_field :title %>
